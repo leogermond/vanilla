@@ -1,0 +1,7 @@
+#pragma once
+
+#if @use_dprintf@
+#define VANILLA_DPRINTF @dprintf@
+#else
+#define VANILLA_DPRINTF(d,...) @printf@(__VA_ARGS__)
+#endif
