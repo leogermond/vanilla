@@ -43,7 +43,7 @@ extern int log_verbose;
 /* Basic logging facilities */
 #define log(d,color,id,f,...) dprintf(d, VT_STYLE(id, color)" %s: "f"\r\n", log_name, ##__VA_ARGS__)
 #define vlog(...) if(log_verbose) log(__VA_ARGS__)
-#define CFMT_CAT_LOC(...) CFMT_CAT_2((__VA_ARGS__), (" [%s:%d]", __FILE__, __LINE__))
+#define CFMT_CAT_LOC(...) CFMT_CAT_2((__VA_ARGS__), ("\t[%s:%d]", __FILE__, __LINE__))
 
 /* User logging functions */
 #define err(...)    log(2, VT_BOLD(VT_RED), "e", __VA_ARGS__)
