@@ -18,35 +18,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef VANILLA_LOG_H
 #define VANILLA_LOG_H
 #include <stdio.h>
-
 #include <config.h>
+#include <vt100.h>
 
 extern char *log_name;
 extern int log_verbose;
-
-/* VT escape sequences */
-#define VT_ESC(seq) "\033[" seq "m"
-#define VT_CLEAR() VT_ESC("0")
-#define VT_STYLE(str,style) VT_ESC(style) str VT_CLEAR()
-#define VT_BOLD(c)   "1;"c
-#define VT_DEFAULT   "39"
-#define VT_BLACK     "30"
-#define VT_RED       "31"
-#define VT_LIRED     "91"
-#define VT_BGRED     "41"
-#define VT_GREEN     "32"
-#define VT_LIGREEN   "92"
-#define VT_YELLOW    "33"
-#define VT_LIYELLOW  "93"
-#define VT_BLUE      "34"
-#define VT_LIBLUE    "94"
-#define VT_MAGENTA   "35"
-#define VT_LIMAGENTA "95"
-#define VT_CYAN      "36"
-#define VT_LICYAN    "96"
-#define VT_LIGRAY    "37"
-#define VT_DKGRAY    "90"
-#define VT_WHITE     "97"
 
 /* Macros voodoo */
 #define EXTRACT_FMT(f,...) f
@@ -55,10 +31,10 @@ extern int log_verbose;
 #define CFMT_CAT_3(a, b, c) EXTRACT_FMT a EXTRACT_FMT b EXTRACT_FMT c EXTRACT_ARGS a EXTRACT_ARGS b EXTRACT_ARGS c
 
 /* Basic logging facilities */
-#define log(d,color,id,f,...) VANILLA_DPRINTF(d, \
-                                              VT_STYLE(id, color)"%s%s: "f"\r\n", \
-                                              *(log_name)?" ":"", log_name, \
-                                              ##__VA_ARGS__)
+#define log(d,color,id,f,...) \
+    VANILLA_DPRINTF(d, VT_STYLE(id, color)"%s%s: "f"\r\n", \
+                    *(log_name)?" ":"", log_name, \
+                    ##__VA_ARGS__)
 #define vlog(...) if(log_verbose) log(__VA_ARGS__)
 #define CFMT_CAT_LOC(...) CFMT_CAT_2((__VA_ARGS__), ("\t[%s:%d]", __FILE__, __LINE__))
 
@@ -97,6 +73,6 @@ extern int log_verbose;
 #define log_enter(...) trace(CFMT_CAT_3(\
 			(VT_STYLE(">", VT_LIGREEN) " %s(", __FUNCTION__), (__VA_ARGS__), (")")))
 
-#define log_exit(...) trace(CFMT_CAT_2((VT_STYLE("<", VT_LIRED) " %s(): ", __FUNCTION__), (__VA_ARGS__)))
+#define log_exit(...) trace(CFMT_CAT_2((VT_STYLE("<", VT_LIRED) " %s() = ", __FUNCTION__), (__VA_ARGS__)))
 
 #endif /* VANILLA_LOG_H */

@@ -2,3 +2,5 @@ option('printf', type:'string', value:'printf', description: 'The printf functio
 option('dprintf', type:'string', value:'dprintf', description: 'The dprintf function or equivalent')
 option('no_stderr', type:'boolean', value:false, description: 'If true, then errors will go to stdout')
 option('tests', type:'boolean', value:true, description: 'Build tests')
+option('include_guard', type:'boolean', value:false,
+       description: 'Add an include guard: .h files will have to get included by specifying <vanilla/name.h> instead of <name.h>')

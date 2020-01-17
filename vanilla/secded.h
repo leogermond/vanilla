@@ -20,7 +20,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include <stdio.h>
 #include <stdbool.h>
-#include <log/log.h>
+#include <log.h>
 
 #define TRACEX(v) trace(#v " == 0x%x", v)
 #define TRACEU(v) trace(#v " == %u", v)

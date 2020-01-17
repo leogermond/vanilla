@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include <stdlib.h>
 #include <stdbool.h>
 
-#include "../log/log.h"
+#include <log.h>
 
 int success = true;
 
