@@ -225,6 +225,8 @@ int test_secded() {
 
 int main() {
     int r = 0;
+    log_verbose = true;
+    log_name = "test secded";
 
     r |= test_secded();
 

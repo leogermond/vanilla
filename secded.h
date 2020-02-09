@@ -22,14 +22,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include <stdbool.h>
 #include <log/log.h>
 
-#ifdef ENABLE_TRACE
-#define LOG_TRACE(...) log(__VA_ARGS__)
-#else
-#define LOG_TRACE(...)
-#endif
-
-#define TRACEX(v) LOG_TRACE(#v " == 0x%x", v)
-#define TRACEU(v) LOG_TRACE(#v " == %u", v)
+#define TRACEX(v) trace(#v " == 0x%x", v)
+#define TRACEU(v) trace(#v " == %u", v)
 
 /*
  SECDED goes for Single Error Correct Double Error Detect
