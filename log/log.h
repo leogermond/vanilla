@@ -55,7 +55,10 @@ extern int log_verbose;
 #define CFMT_CAT_3(a, b, c) EXTRACT_FMT a EXTRACT_FMT b EXTRACT_FMT c EXTRACT_ARGS a EXTRACT_ARGS b EXTRACT_ARGS c
 
 /* Basic logging facilities */
-#define log(d,color,id,f,...) VANILLA_DPRINTF(d, VT_STYLE(id, color)" %s: "f"\r\n", log_name, ##__VA_ARGS__)
+#define log(d,color,id,f,...) VANILLA_DPRINTF(d, \
+                                              VT_STYLE(id, color)"%s%s: "f"\r\n", \
+                                              *(log_name)?" ":"", log_name, \
+                                              ##__VA_ARGS__)
 #define vlog(...) if(log_verbose) log(__VA_ARGS__)
 #define CFMT_CAT_LOC(...) CFMT_CAT_2((__VA_ARGS__), ("\t[%s:%d]", __FILE__, __LINE__))
 

@@ -20,10 +20,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include <stdio.h>
 #include <stdbool.h>
-#define LOG(f, ...) printf("secded: " f "\n", ##__VA_ARGS__)
+#include <log/log.h>
 
 #ifdef ENABLE_TRACE
-#define LOG_TRACE(...) LOG(__VA_ARGS__)
+#define LOG_TRACE(...) log(__VA_ARGS__)
 #else
 #define LOG_TRACE(...)
 #endif
